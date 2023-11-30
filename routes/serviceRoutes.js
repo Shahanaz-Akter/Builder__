@@ -1,5 +1,5 @@
 const express = require('express');
-const { addServiceView, serviceListView, edit_service_list, appointmentListView, createService, getAllServicesByCategory } = require('../controllers/serviceController');
+const { addServiceView, serviceListView, edit_service_list, postEditService, deleteService, appointmentListView, createService, getAllServicesByCategory } = require('../controllers/serviceController');
 const router = express.Router();
 const uploadIMG = require('../config/img_up_multer');
 const destinationPath = "./public/images/service_images/"; // Set your desired destination path
@@ -13,9 +13,18 @@ router.post('/:user_id/:template_id', upload.any([
   { name: 'secondary_images', maxCount: 5 }
 ]), createService);
 
+
 router.get('/:user_id/:template_id/service_list', serviceListView);
 router.get('/api/:user_id/:template_id/service_by_category', getAllServicesByCategory);
 router.get('/:user_id/:template_id/appointment_list', appointmentListView);
+
+// edit delete service route
 router.get('/:user_id/:template_id/edit_service_list/:service_id', edit_service_list);
+router.post('/post_edit_service', upload.any([
+  { name: 'primary_image', maxCount: 1 },
+  { name: 'secondary_images', maxCount: 5 }
+]), postEditService);
+
+router.post('/:user_id/:template_id/delete_service/:service_id', deleteService);
 
 module.exports = router;

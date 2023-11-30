@@ -211,7 +211,7 @@ for (let i = 0; i < 7; i++) {
   officeTimeArr[i] = new Array(2);
 }
 const officeStartTime = (tag, serNum, timeSlodNum, bigBoxNo) => {
-  
+
   let time_in = document.getElementById(`stimes_0`);
   time_in_val = JSON.parse(time_in.getAttribute("value"));
   time_in_val[bigBoxNo][timeSlodNum][serNum] = tag.value;
@@ -250,13 +250,13 @@ const duplicateTimeSlot = (tag, boxno) => {
         element.setAttribute(
           "onchange",
           onchangeParts[0] +
-            ", " +
-            onchangeParts[1] +
-            ", " +
-            dateSlotCount +
-            "," +
-            boxno +
-            ")"
+          ", " +
+          onchangeParts[1] +
+          ", " +
+          dateSlotCount +
+          "," +
+          boxno +
+          ")"
         );
       }
     }
@@ -313,8 +313,8 @@ const make_duplicate_service = (copy_block, parent_block) => {
 
   function collectInnerIDs(element) {
 
-    
-   
+
+
     if (element.name && element.name.includes("primary_image")) {
       element.setAttribute("name", `primary_image[${serviceCopyCount}]`);
     }
@@ -323,8 +323,8 @@ const make_duplicate_service = (copy_block, parent_block) => {
     }
     if (element.id) {
       console.log(element.id);
-      
-    
+
+
 
       if (element.id.includes("_")) {
         let id = element.id.split("_");
@@ -342,13 +342,13 @@ const make_duplicate_service = (copy_block, parent_block) => {
       element.setAttribute(
         "onchange",
         onchangeParts[0] +
-          "," +
-          onchangeParts[1] +
-          "," +
-          onchangeParts[2] +
-          ", " +
-          serviceCopyCount +
-          ")"
+        "," +
+        onchangeParts[1] +
+        "," +
+        onchangeParts[2] +
+        ", " +
+        serviceCopyCount +
+        ")"
       );
     } else if (element.hasAttribute("onchange")) {
       let onchangeIS = element.getAttribute("onchange");
