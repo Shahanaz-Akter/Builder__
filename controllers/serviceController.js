@@ -156,25 +156,24 @@ const edit_service_list = async (req, res) => {
   categories = await cate_gory.toArray();
 
   // console.log(service);
-  console.log(categories);
 
-  // console.log(service.service_days);
-  // console.log(service.service_times);
+  console.log(service.service_days);
+  console.log(service.service_times);
 
   res.render("service/edit_service_list", { user_id, template_id, categories, service });
 }
 
-
 const postEditService = async (req, res) => {
-  // console.log(req.files);
+  console.log(req.files);
   const { service_name, service_description, service_price, service_times, service_days } = req.body;
 
   // let service_name = req.body["service_name"];
   // let service_description = req.body['service_description'];
-
   // let service_price = req.body['service_price'];
   // let service_times = req.body['service_times'];
   // let service_days = req.body['service_days'];
+
+
 
   console.log(service_name);
   console.log(service_description);
@@ -182,11 +181,9 @@ const postEditService = async (req, res) => {
   console.log(service_times);
   console.log(service_days);
 
-
-
 }
 
-//  service_description, service_price,service_category, primary_image[0], secondary_images[0],starting_time,ending_time
+// service_description, service_price,service_category, primary_image[0], secondary_images[0],starting_time,ending_time
 
 const deleteService = async (req, res) => {
   console.log('delete');

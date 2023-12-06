@@ -776,12 +776,12 @@
                                                             <div class="col-md-6  " for="" style="color: #3D3D3D">
                                                                 <label class="align-items-center d-flex justify-content-between" for="timeInput" style="color: #3D3D3D;">
                                                                     <span style="font-weight: 600;">Price</span>
-                                                                    <div style="text-align: center">
+                                                                    <!-- <div style="text-align: center">
                                                                         <label class="switch">
                                                                             <input onclick="inputTypeCheckBox(this, null, 'timeInput')" type="checkbox">
                                                                             <span class="slider round"></span>
                                                                         </label>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </label>
                                                                 <div>
                                                                     <input class="w-100" placeholder="Price" type="text" id="timeInput" style="border: none; outline:none;background-color:#EBEBEB;padding: 9px;border-radius: 5px" name="service_price" value="<%=service.price%>">
@@ -797,12 +797,12 @@
                                                                         <label class="align-items-center d-flex justify-content-between" for="contentsTitleInput_1000" style="color: #3D3D3D;">
                                                                             <span style="font-weight: 600;">Service
                                                                                 Category</span>
-                                                                            <div style="text-align: center">
+                                                                            <!-- <div style="text-align: center">
                                                                                 <label class="switch">
                                                                                     <input onclick="inputTypeCheckBox(this, null, 'contentsTitleInput_1000')" type="checkbox">
                                                                                     <span class="slider round"></span>
                                                                                 </label>
-                                                                            </div>
+                                                                            </div> -->
                                                                         </label>
 
                                                                         <!-- updated -->
@@ -811,18 +811,13 @@
 
 
                                                                             <select class="my-form-control p-2" onclick="showContentDropdown(this)" id="" name="service_category">
-
                                                                                 <% categories.forEach(category=> { %>
-
-                                                                                    <option value="<%= category.name %>" <% if (category._id===service.service_category_id) { %> selected <%} %> >
+                                                                                    <option value="<%= category.name %>" <% if (category._id.toString()==service.service_category_id) { %> selected <% } %> >
                                                                                             <%= category.name %>
-                                                                                                <%= typeof(category._id) %>
                                                                                     </option>
-
                                                                                     <% }); %>
-
-
                                                                             </select>
+
 
 
                                                                         </div>
@@ -918,14 +913,15 @@
 
                                                                     <% service.secondary_images.forEach((imageUrl,key)=>{ %>
                                                                         <div style="width: 90px; height: 90px; background:url('<%=imageUrl %>') ;background-size: cover;margin-right: 8px;margin-bottom: 8px;" class="position-relative" id="secondary_img_preview_<%=key+1%>">
-
                                                                             <span class="position-absolute" onclick="removeSecondaryImg(this)">
                                                                                 <i class="fa-solid fa-circle-xmark text-primary" style="font-size:30px;color:white;border:1px solid skyblue;border-radius:50%;top: 0;right: 0;cursor: pointer;"></i>
                                                                             </span>
                                                                         </div>
                                                                         <% }); %>
 
+                                                                            <div class="secondary-img-container" id="secondary-img-container">
 
+                                                                            </div>
 
                                                                 </div>
                                                                 <div class="s-i-c-2">
@@ -938,235 +934,88 @@
 
                                                     </div>
 
-
                                                     <div class="col-md-5 col-lg-5 gap-4 ">
 
-                                                        <style>
-                                                            input.form-control:focus {
-                                                                border-color: white;
-                                                                /* Change the border color to your desired color */
-                                                                box-shadow: none;
-                                                                /* Add a box shadow on focus */
-                                                                outline: none;
-                                                                /* Remove the default outline */
-                                                            }
-                                                        </style>
-
-                                                        <!-- #EBEBEB -->
-                                                        <div class="mb-1" style="border: 1px solid transparent; padding: 12px;width: 96%;  max-height:650px;margin: auto;border-radius: 5px;overflow-y:auto">
-
-                                                            <div id="">
-                                                                <div class="mb-3 dateTimeBox" id="" style="border: 1px solid white;border-radius: 5px;">
-                                                                    <div class="">
-                                                                        <div class="row ps-3 ms-2" style="font-weight: 600;">Available Time</div>
-                                                                        <input type="text" name="service_days" style="height:100px;flex:1" value="<%= JSON.stringify(service.service_days)%>" id="sdays_0" class="">
-
-                                                                        <input type="text" name="service_times" id="stimes_0" style="height:100px;flex:1"
-                                                                            value="[[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]]]"
-                                                                            class="">
-
-                                                                        <div class="row p-2 mb-2 ms-3 me-3 mt-0" style="background-color: white;">
-                                                                            <%service.service_days.forEach((day,key)=>{%>
-                                                                                <div class="row p-2 mb-2   mt-0" style="background-color: white;">
-
-                                                                                    <div class="col-6 mb-2 border">
-
-                                                                                        <div class="mb-3">
-                                                                                            <div for="">Days</div>
-                                                                                            <div class="border" style="background: #EBEBEB;  border-radius: 8px; padding: 0.375rem 0.75rem">
-
-                                                                                                <span>
-                                                                                                    <%= day %>
-                                                                                                </span>
-
-                                                                                            </div>
-
-                                                                                        </div>
-
-                                                                                        <div class="">
-
-
-                                                                                            <input type="radio" id="fri_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Fri') ? 'checked' : '' %> name="friday">
-                                                                                            <label for="fri_<%=key%>" class="me-1">Fri</label>
-
-                                                                                            <input type="radio" id="sat_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Sat') ? 'checked' : '' %> name="saturday">
-                                                                                            <label for="sat_<%=key%>" class="me-1">Sat</label>
-
-                                                                                            <input type="checkbox" id="sun_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Sun') ? 'checked' : '' %> name="sunday">
-                                                                                            <label for="sun_<%=key%>" class="me-1">Sun</label>
-
-                                                                                            <input type="checkbox" id="mon_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Mon') ? 'checked' : '' %> name="monday">
-                                                                                            <label for="mon_<%=key%>" class="me-1">Mon</label>
-
-                                                                                            <input type="checkbox" id="tue_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Tue') ? 'checked' : '' %> name="tuesday">
-                                                                                            <label for="tue_<%=key%>" class="me-1">Tue</label>
-
-                                                                                            <input type="checkbox" id="wed_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Wed') ? 'checked' : '' %> name="wednesday">
-                                                                                            <label for="wed_<%=key%>" class="me-1">Wed</label>
-
-                                                                                            <input type="checkbox" id="thu_<%=key%>" class="me-1" style="border: none!important; background: #EBEBEB;" <%=day.includes('Thu') ? 'checked' : '' %> name="thursday">
-                                                                                            <label for="thu_<%=key%>" class="me-1">Thu</label>
-
-
-                                                                                        </div>
-
-
-                                                                                        <!-- <div class="mt-3">
-                                                                                            <div style="background-color:white; border-radius:5px; padding:10px;">
-                                                                                                <label class="varient_label inline-block d-flex justify-content-between align-items-center" for="colorVariant">Days <span onclick="this.parentNode.parentNode.parentNode.remove()"><i
-                                                                                                            class="fa-solid fa-circle-xmark" style="font-size:20px;color:skyblue;border:1px solid skyblue;border-radius:50%;cursor:pointer;"></i></span></label>
-                                                                                                <div class="position-relative">
-                                                                                                    <ul class="colorInputUL" id="colorInputUL" style=" margin-bottom: 0px;" onclick="showColorDropDown(this)">
-                                                                                                        <input type="text" class="tagIntpus" name="colorVariants" spellcheck="false" id="variantColor" placeholder="Write here for tag" onkeypress="return event.keyCode != 13;">
-                                                                                                    </ul>
-                                                                                                    <div class="dropdownBox d-none" id="colorDropdownBox" style="height: 200px; overflow-y: auto;">
-                                                                                                        <ul>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Red
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Blue
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Black
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Pink
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Yellow
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">White
-                                                                                                            </li>
-                                                                                                            <li onclick="getValueFronDropDown(this)">Brown
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div> -->
-
-                                                                                    </div>
-
-                                                                                    <div class="col-6 mb-2 border">
-
-                                                                                        <div class="mb-3">
-                                                                                            <label for="">Starting Time</label>
-
-                                                                                            <input type="time" class="form-control" value="<%= service.service_times[key][0] %>" style="border: none!important; background: #EBEBEB;">
-
-
-                                                                                        </div>
-                                                                                        <div class="mb-2">
-                                                                                            <label for="">Ending Time</label>
-
-
-                                                                                            <input type="time" class="form-control" value="<%= service.service_times[key][1] %>" style="border: none!important; background: #EBEBEB;">
-
-
-                                                                                        </div>
-
-                                                                                    </div>
-
-
-                                                                                </div>
-                                                                                <%}); %>
-
-
-
-
-                                                                        </div>
-
-                                                                    </div>
-
-
+                                                        <div class="d-none">
+                                                            <label class="align-items-center d-flex justify-content-between" for="availableTimeInput" style="color: #3D3D3D;">
+                                                                <span style="font-weight: 600;">Available
+                                                                    Time</span>
+                                                            </label>
+                                                            <div class="row p-2 m-3" style="background-color: #EBEBEB;border-radius: 8px;">
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
                                                                 </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <!-- duplicate time slot -->
-                                                        <div class="mb-3 " style="border: 1px solid transparent; padding: 12px;width: 96%;max-height:328px;margin: auto;border-radius: 5px;overflow-y:auto">
-                                                            <div class="" id="dateTimeContainer">
-
-                                                                <div class="mb-3 dateTimeBox" id="dateTimeBox" style="border: 1px solid white;border-radius: 5px;">
-                                                                    <div class="">
-                                                                        <div class="row ps-3 ms-2" style="font-weight: 600;">Available Time</div>
-
-                                                                        <div class="row p-2 mb-2 ms-3 me-3 mt-0" style="background-color: white;">
-
-                                                                            <div class="col-6 mb-2 border">
-
-                                                                                <div class="mb-3">
-                                                                                    <div for="">Days</div>
-                                                                                    <div class="border" style="background: #EBEBEB;  border-radius: 8px; padding: 0.375rem 0.75rem">
-
-                                                                                        <span>Fri, Sat, Sun, Mon....</span>
-
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                                <div class="">
-
-
-                                                                                    <input type="checkbox" id="fri" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="fri" class="me-1">Fri</label>
-
-                                                                                    <input type="checkbox" id="sat" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="sat" class="me-1">Sat</label>
-
-                                                                                    <input type="checkbox" id="sun" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="sun" class="me-1">Sun</label>
-
-                                                                                    <input type="checkbox" id="min" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="mon" class="me-1">Mon</label>
-
-                                                                                    <input type="checkbox" id="tue" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="tue" class="me-1">Tue</label>
-
-                                                                                    <input type="checkbox" id="wed" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="wed" class="me-1">Wed</label>
-
-                                                                                    <input type="checkbox" id="thu" class="me-1" style="border: none!important; background: #EBEBEB;">
-                                                                                    <label for="thu" class="me-1">Thu</label>
-
-
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                            <div class="col-6 mb-2 border">
-
-                                                                                <div class="mb-3">
-                                                                                    <label for="">Starting Time</label>
-
-                                                                                    <input type="time" class="form-control" value="" style="border: none!important; background: #EBEBEB;">
-
-
-                                                                                </div>
-                                                                                <div class="mb-2">
-                                                                                    <label for="">Ending Time</label>
-
-
-                                                                                    <input type="time" class="form-control" value="" style="border: none!important; background: #EBEBEB;">
-
-
-                                                                                </div>
-
-                                                                            </div>
-
-
-                                                                        </div>
-
-                                                                    </div>
-
-
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
+                                                                </div>
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
+                                                                </div>
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
+                                                                </div>
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
+                                                                </div>
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
+                                                                </div>
+                                                                <div class="col-6 mb-1">
+                                                                    Sun, Mon, Tues : 8:30 PM to 12:30 PM
                                                                 </div>
 
                                                             </div>
+                                                        </div>
 
-                                                            <div>
-                                                                <span onclick="duplicateTimeSlot(this , 0)" style="background-color: #2871FF;display: inline-block;width: 100%;text-align: center;padding: 10px;border-radius: 5px;color: white;font-weight: 600;">Add
-                                                                    Another Time Slot</span>
+
+
+                                                        <% const maxDisplayedArrays=7; %>
+
+                                                            <div class="d-flex day_time" style="width: 96%;overflow-x:auto">
+                                                                <%const combinedArrays=service.service_days.slice(0,maxDisplayedArrays).concat(Array(maxDisplayedArrays-service.service_days.length).fill(['null']));%>
+                                                                    <input type="text" name="service_days" style="height:100px;flex:1; width:96%;" value="[<%= combinedArrays.map(currentArray => JSON.stringify(currentArray)).join(',') %>]" id="sdays_0" class="">
+
+                                                                    <%const combinedArray=service.service_times.slice(0,maxDisplayedArrays).concat(Array(maxDisplayedArrays-service.service_times.length).fill(['null']));%>
+                                                                        <input type="text" name="service_times" style="height:100px;flex:1; width:96%;" value="[<%= combinedArray.map(currentArray => JSON.stringify(currentArray)).join(',') %>]" class="" id="stimes_0">
                                                             </div>
 
-                                                        </div>
+
+
+                                                            <!-- duplicate time slot -->
+                                                            <div class="mb-3 " style="border: 1px solid #EBEBEB;padding: 12px;width: 96%;max-height:420px;margin: auto;border-radius: 5px;overflow-y:auto">
+                                                                <div id="dateTimeContainer">
+                                                                    <div class="mb-3 dateTimeBox" id="dateTimeBox" style="border: 1px solid #2871FF;padding: 12px;border-radius: 5px;">
+                                                                        <div class="d-flex justify-content-center gap-1 ">
+                                                                            <p class="d-flex align-items-center" style="color: #3D3D3D;">Day</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Sun</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Mon</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Tue</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Wed</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Thu</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Fri</p>
+                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                                Sat</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <input type="time" name="" id="" onchange="officeStartTime(this, 0, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
+                                                                            <span style="display:inline-block; width: 20%;text-align:center;color:#3D3D3D;">To</span>
+                                                                            <input type="time" name="" id="" onchange="officeStartTime(this, 1, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <span onclick="duplicateTimeSlot(this , 0)" style="background-color: #2871FF;display: inline-block;width: 100%;text-align: center;padding: 10px;border-radius: 5px;color: white;font-weight: 600;">Add
+                                                                        Another Time Slot</span>
+                                                                </div>
+
+
+                                                            </div>
 
                                                     </div>
 
@@ -1302,7 +1151,7 @@
         }
     </script>
 
-    <script>
+    <!-- <script>
         let dateSlotCount = 0;
         const fdgdfg = (tag, id_) => {
             console.log('ghxgfvhdgb');
@@ -1390,7 +1239,7 @@
             copySlotParent.append(copySlot);
         };
 
-    </script>
+    </script> -->
 
 
     <script>
