@@ -19,6 +19,9 @@ const createService = async (req, res) => {
   // console.log("service date : ", service_days);
   // console.log("service date : ", service_times);
 
+  let service_days_pre = service_days;
+  let service_times_pre = service_times;
+
   const last_day_arr = JSON.parse(service_days).map((outerArray) => {
     return outerArray.filter((innerArray) => {
       return innerArray.some((element) => element !== null);
@@ -92,6 +95,8 @@ const createService = async (req, res) => {
       service_days: last_day_arr[i],
       service_times: last_time_arr[i],
       service_category_id: serviceCategoryId,
+      service_days_pre: service_days_pre,
+      service_times_pre: service_times_pre
     };
     const service = await collection1.insertOne(data);
   }
@@ -166,6 +171,9 @@ const edit_service_list = async (req, res) => {
 const postEditService = async (req, res) => {
   console.log(req.files);
   const { service_name, service_description, service_price, service_times, service_days } = req.body;
+  let primary_img = req.body[files];
+  console.log(primary_img);
+
 
   // let service_name = req.body["service_name"];
   // let service_description = req.body['service_description'];
@@ -173,13 +181,16 @@ const postEditService = async (req, res) => {
   // let service_times = req.body['service_times'];
   // let service_days = req.body['service_days'];
 
-
-
   console.log(service_name);
   console.log(service_description);
   console.log(service_price);
+  console.log(service_price);
   console.log(service_times);
   console.log(service_days);
+
+  // res.redirect(`/service/${user_id}/${template_id}`);
+
+  return res.redirect('/mimi');
 
 }
 
@@ -187,7 +198,6 @@ const postEditService = async (req, res) => {
 
 const deleteService = async (req, res) => {
   console.log('delete');
-
 }
 
 module.exports = {

@@ -969,53 +969,57 @@
 
 
 
-                                                        <% const maxDisplayedArrays=7; %>
-
-                                                            <div class="d-flex day_time" style="width: 96%;overflow-x:auto">
-                                                                <%const combinedArrays=service.service_days.slice(0,maxDisplayedArrays).concat(Array(maxDisplayedArrays-service.service_days.length).fill(['null']));%>
-                                                                    <input type="text" name="service_days" style="height:100px;flex:1; width:96%;" value="[<%= combinedArrays.map(currentArray => JSON.stringify(currentArray)).join(',') %>]" id="sdays_0" class="">
-
-                                                                    <%const combinedArray=service.service_times.slice(0,maxDisplayedArrays).concat(Array(maxDisplayedArrays-service.service_times.length).fill(['null']));%>
-                                                                        <input type="text" name="service_times" style="height:100px;flex:1; width:96%;" value="[<%= combinedArray.map(currentArray => JSON.stringify(currentArray)).join(',') %>]" class="" id="stimes_0">
-                                                            </div>
+                                                        <div class="d-flex day_time" style="width: 96%;overflow-x:auto!important">
 
 
+                                                            <input type="text" name="service_days" style="height:100px;flex:1" value="<%= service.service_days_pre%>" id="sdays_0" class="" placeholder="<%= service.service_days_pre%>">
 
-                                                            <!-- duplicate time slot -->
-                                                            <div class="mb-3 " style="border: 1px solid #EBEBEB;padding: 12px;width: 96%;max-height:420px;margin: auto;border-radius: 5px;overflow-y:auto">
-                                                                <div id="dateTimeContainer">
-                                                                    <div class="mb-3 dateTimeBox" id="dateTimeBox" style="border: 1px solid #2871FF;padding: 12px;border-radius: 5px;">
-                                                                        <div class="d-flex justify-content-center gap-1 ">
-                                                                            <p class="d-flex align-items-center" style="color: #3D3D3D;">Day</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Sun</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Mon</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Tue</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Wed</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Thu</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Fri</p>
-                                                                            <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
-                                                                                Sat</p>
-                                                                        </div>
-                                                                        <div>
-                                                                            <input type="time" name="" id="" onchange="officeStartTime(this, 0, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
-                                                                            <span style="display:inline-block; width: 20%;text-align:center;color:#3D3D3D;">To</span>
-                                                                            <input type="time" name="" id="" onchange="officeStartTime(this, 1, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
-                                                                        </div>
+
+                                                            <input type="text" name="service_times" id="stimes_0" style="height:100px;flex:1"
+                                                                value="[ [[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],
+                                                                [[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null] ]]"
+                                                                class="">
+
+                                                        </div>
+
+
+
+
+                                                        <!-- duplicate time slot -->
+                                                        <div class="mb-3 " style="border: 1px solid #EBEBEB;padding: 12px;width: 96%;max-height:420px;margin: auto;border-radius: 5px;overflow-y:auto">
+                                                            <div id="dateTimeContainer">
+                                                                <div class="mb-3 dateTimeBox" id="dateTimeBox" style="border: 1px solid #2871FF;padding: 12px;border-radius: 5px;">
+                                                                    <div class="d-flex justify-content-center gap-1 ">
+                                                                        <p class="d-flex align-items-center" style="color: #3D3D3D;">Day</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Sun</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Mon</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Tue</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Wed</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Thu</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Fri</p>
+                                                                        <p class="dayName" onclick="selectDateForOpen(this, 0, 0)">
+                                                                            Sat</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input type="time" name="" id="" onchange="officeStartTime(this, 0, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
+                                                                        <span style="display:inline-block; width: 20%;text-align:center;color:#3D3D3D;">To</span>
+                                                                        <input type="time" name="" id="" onchange="officeStartTime(this, 1, 0, 0)" style="border: none; outline:none;color:#3D3D3D;background-color:#EBEBEB;padding: 9px;border-radius: 5px;width:35%">
                                                                     </div>
                                                                 </div>
-                                                                <div>
-                                                                    <span onclick="duplicateTimeSlot(this , 0)" style="background-color: #2871FF;display: inline-block;width: 100%;text-align: center;padding: 10px;border-radius: 5px;color: white;font-weight: 600;">Add
-                                                                        Another Time Slot</span>
-                                                                </div>
-
-
                                                             </div>
+                                                            <div>
+                                                                <span onclick="duplicateTimeSlot(this , 0)" style="background-color: #2871FF;display: inline-block;width: 100%;text-align: center;padding: 10px;border-radius: 5px;color: white;font-weight: 600;">Add
+                                                                    Another Time Slot</span>
+                                                            </div>
+
+
+                                                        </div>
 
                                                     </div>
 
@@ -1066,7 +1070,8 @@
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="/assets/js/others/jquery.min.js"></script>
     <script src="/assets/js/others/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/others/add_service.js"></script>
+    <!-- <script src="/assets/js/others/add_service.js"></script> -->
+    <script src="/assets/js/others/edit_service.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 

@@ -29,6 +29,7 @@ const selectDateForOpen = (tag, bigBoxNo, smBoxNo) => {
 
   let day_time_in = document.getElementById(`sdays_0`);
   let day_time_in_val = JSON.parse(day_time_in.getAttribute("value")); // [[],[],[],[],[],[],[]]
+  console.log("json day time value before ", day_time_in.getAttribute("value"));
   let day_value = tag.innerText.trim();
 
   let allDayConatiner = tag.parentNode.parentNode.parentNode.parentNode;
