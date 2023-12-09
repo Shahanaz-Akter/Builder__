@@ -808,17 +808,13 @@
                                                                         <!-- updated -->
                                                                         <div class="position-relative single-contact-info productName">
 
-
-
                                                                             <select class="my-form-control p-2" onclick="showContentDropdown(this)" id="" name="service_category">
                                                                                 <% categories.forEach(category=> { %>
-                                                                                    <option value="<%= category.name %>" <% if (category._id.toString()==service.service_category_id) { %> selected <% } %> >
+                                                                                    <option value="<%= category._id %>" <% if (category._id.toString()==service.service_category_id) { %> selected <% } %> >
                                                                                             <%= category.name %>
                                                                                     </option>
                                                                                     <% }); %>
                                                                             </select>
-
-
 
                                                                         </div>
 
@@ -902,7 +898,7 @@
                                                                         Set
                                                                         Primary
                                                                         Image</label>
-                                                                    <input type="file" for="mainImg" class="d-none" id="mainImg" onchange="main_image_changed(this,null)" name="primary_image[0]">
+                                                                    <input type="file" for="mainImg" class="d-none" id="mainImg" onchange="main_image_changed(this,null)" name="primary_image">
                                                                 </div>
                                                             </div>
 
@@ -926,7 +922,7 @@
                                                                 </div>
                                                                 <div class="s-i-c-2">
                                                                     <label for="secondaryImg" class="btn btn-info"><i class="fa-solid fa-plus"></i></label>
-                                                                    <input type="file" name="secondary_images[0]" class="d-none" id="secondaryImg" onchange="secondary_image_changed(this,null)" multiple>
+                                                                    <input type="file" name="secondary_images" class="d-none" id="secondaryImg" onchange="secondary_image_changed(this,null)" multiple>
                                                                 </div>
                                                             </div>
 
@@ -975,10 +971,7 @@
                                                             <input type="text" name="service_days" style="height:100px;flex:1" value="<%= service.service_days_pre%>" id="sdays_0" class="" placeholder="<%= service.service_days_pre%>">
 
 
-                                                            <input type="text" name="service_times" id="stimes_0" style="height:100px;flex:1"
-                                                                value="[ [[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],
-                                                                [[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]],[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null] ]]"
-                                                                class="">
+                                                            <input type="text" name="service_times" id="stimes_0" style="height:100px;flex:1" value="<%= service.service_times_pre%>" class="">
 
                                                         </div>
 
