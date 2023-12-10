@@ -746,7 +746,7 @@
 
                                 <!-- Add a single product -->
                                 <!-- <%=user_id%>/<%=template_id%> -->
-                                <form method="post" enctype="multipart/form-data" action="/service/post_edit_service">
+                                <form method="post" enctype="multipart/form-data" action="../post_edit_service/<%=service._id%>">
 
                                     <div id="product_form">
                                         <div id="addServices">
@@ -899,6 +899,8 @@
                                                                         Primary
                                                                         Image</label>
                                                                     <input type="file" for="mainImg" class="d-none" id="mainImg" onchange="main_image_changed(this,null)" name="primary_image">
+                                                                    <input type="file" for="" class="" id="" name="p_image">
+
                                                                 </div>
                                                             </div>
 
@@ -909,7 +911,7 @@
 
                                                                     <% service.secondary_images.forEach((imageUrl,key)=>{ %>
                                                                         <div style="width: 90px; height: 90px; background:url('<%=imageUrl %>') ;background-size: cover;margin-right: 8px;margin-bottom: 8px;" class="position-relative" id="secondary_img_preview_<%=key+1%>">
-                                                                            <span class="position-absolute" onclick="removeSecondaryImg(this)">
+                                                                            <span class="position-absolute" onclick="removeSecondaryImg(this, '<%=imageUrl %>')">
                                                                                 <i class="fa-solid fa-circle-xmark text-primary" style="font-size:30px;color:white;border:1px solid skyblue;border-radius:50%;top: 0;right: 0;cursor: pointer;"></i>
                                                                             </span>
                                                                         </div>
@@ -923,6 +925,8 @@
                                                                 <div class="s-i-c-2">
                                                                     <label for="secondaryImg" class="btn btn-info"><i class="fa-solid fa-plus"></i></label>
                                                                     <input type="file" name="secondary_images" class="d-none" id="secondaryImg" onchange="secondary_image_changed(this,null)" multiple>
+                                                                    <!-- <input type="file" for="" class="" id="" name="s_image" multiple> -->
+
                                                                 </div>
                                                             </div>
 
@@ -969,7 +973,6 @@
 
 
                                                             <input type="text" name="service_days" style="height:100px;flex:1" value="<%= service.service_days_pre%>" id="sdays_0" class="" placeholder="<%= service.service_days_pre%>">
-
 
                                                             <input type="text" name="service_times" id="stimes_0" style="height:100px;flex:1" value="<%= service.service_times_pre%>" class="">
 

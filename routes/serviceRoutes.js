@@ -20,11 +20,11 @@ router.get('/:user_id/:template_id/appointment_list', appointmentListView);
 
 // edit delete service route
 router.get('/:user_id/:template_id/edit_service_list/:service_id', edit_service_list);
-router.post('/post_edit_service', upload.any([
+router.post('/:user_id/:template_id/post_edit_service/:service_id', upload.any([
   { name: 'primary_image', maxCount: 1 },
   { name: 'secondary_images', maxCount: 5 }
 ]), postEditService);
 
-router.post('/:user_id/:template_id/delete_service/:service_id', deleteService);
 
+router.get('/:user_id/:template_id/delete_service/:service_id', deleteService);
 module.exports = router;

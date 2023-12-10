@@ -581,6 +581,8 @@ const secondary_image_changed = (tag, ind) => {
 };
 const removeSecondaryImg = (tag) => {
   let parentImgContainer = tag.parentNode.parentNode;
+  // console.tag(parentImgContainer);
+
   let imge_cotainer = tag.parentNode;
   parentImgContainer.removeChild(imge_cotainer);
 };

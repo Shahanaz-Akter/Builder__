@@ -579,10 +579,27 @@ const secondary_image_changed = (tag, ind) => {
         //   previewContainer.append(secondaryImageAdder);
     }
 };
+
+
+//mimi
 const removeSecondaryImg = (tag) => {
     let parentImgContainer = tag.parentNode.parentNode;
     let imge_cotainer = tag.parentNode;
     parentImgContainer.removeChild(imge_cotainer);
+
+    // stored removed image url and store to the new array
+
+
+    let Container = tag.parentNode;
+    //this container provides this code   
+    //     <div style="width: 90px; height: 90px; background:url('/images/service_images/1702202370272-Screenshot 2023-12-05 131859.png') ;background-size: cover;margin-right: 8px;margin-bottom: 8px;" class="position-relative" id="secondary_img_preview_3">
+    //     <span class="position-absolute" onclick="removeSecondaryImg(this, '/images/service_images/1702202370272-Screenshot 2023-12-05 131859.png')">
+    //     <i class="fa-solid fa-circle-xmark text-primary" style="font-size:30px;color:white;border:1px solid skyblue;border-radius:50%;top: 0;right: 0;cursor: pointer;"></i>
+    // </span>
+    // </div>
+    let url = Container.getAttribute('background');
+    console.log(Container);
+    console.log(url);
 };
 
 // for add service category
