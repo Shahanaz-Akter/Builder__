@@ -587,7 +587,7 @@ const removeSecondaryImg = (tag) => {
     let imge_cotainer = tag.parentNode;
     parentImgContainer.removeChild(imge_cotainer);
 
-    // stored removed image url and store to the new array
+    // stored removed image url and store to the new array  
 
 
     let Container = tag.parentNode;
