@@ -825,6 +825,7 @@
                                                             </div>
 
                                                         </div>
+
                                                         <!-- <div class=" row px-4 mt-3">
                                                                     <div class="col-6 row">
                                                                         <label class="align-items-center col-3 d-flex"
@@ -899,12 +900,10 @@
                                                                         Primary
                                                                         Image</label>
                                                                     <input type="file" for="mainImg" class="d-none" id="mainImg" onchange="main_image_changed(this,null)" name="primary_image">
-                                                                    <input type="file" for="" class="" id="" name="p_image">
+                                                                    <input type="hidden" for="" class="" id="" name="p_image">
 
                                                                 </div>
                                                             </div>
-
-
 
                                                             <div class="col-md-8 col-sm-12 col-lg-8" id="secondary_img_container_parent" style="border:1px solid #C9D2D7; padding:10px; max-height:300px; overflow-y:auto;border-radius: 8px;">
                                                                 <div class="secondary-img-container">
@@ -925,8 +924,9 @@
                                                                 <div class="s-i-c-2">
                                                                     <label for="secondaryImg" class="btn btn-info"><i class="fa-solid fa-plus"></i></label>
                                                                     <input type="file" name="secondary_images" class="d-none" id="secondaryImg" onchange="secondary_image_changed(this,null)" multiple>
-                                                                    <!-- <input type="file" for="" class="" id="" name="s_image" multiple> -->
 
+                                                                    <!-- Hidden input field to store removed images -->
+                                                                    <input type="hidden" id="s_images_input" name="s_images" value="" multiple>
                                                                 </div>
                                                             </div>
 
@@ -967,10 +967,7 @@
                                                             </div>
                                                         </div>
 
-
-
                                                         <div class="d-flex day_time" style="width: 96%;overflow-x:auto!important">
-
 
                                                             <input type="text" name="service_days" style="height:100px;flex:1" value="<%= service.service_days_pre%>" id="sdays_0" class="" placeholder="<%= service.service_days_pre%>">
 
@@ -1256,6 +1253,30 @@
         }
     </script>
 
+
+
+    <!-- <script>
+        function removeSecondaryImg(element, imageUrl) {
+            const sImagesInput = document.getElementById('s_images_input');
+            const selectedImages = sImagesInput.value.split(',');
+
+            const index = selectedImages.indexOf(imageUrl);
+            if (index === -1) {
+                // Image is not selected, add it to the array
+                selectedImages.push(imageUrl);
+                // Highlight the selected image (you can add a CSS class for styling)
+                element.style.border = '2px solid green';
+            } else {
+                // Image is selected, remove it from the array
+                selectedImages.splice(index, 1);
+                // Remove the highlight for the unselected image
+                element.style.border = '';
+            }
+
+            // Update the hidden input value with the selected images
+            sImagesInput.value = selectedImages.join(',');
+        }
+    </script> -->
 
 
 

@@ -115,7 +115,7 @@ const serviceListView = async (req, res) => {
   const collection1 = mongoose.connection.collection(service_table);
   let services = await collection1.find({});
   services = await services.toArray();
-  console.log(services);
+  // console.log(services);
   res.render("service/service_list", {
     user_id: user_id,
     template_id: template_id,
@@ -134,7 +134,7 @@ const getAllServicesByCategory = async (req, res) => {
   let { user_id, template_id } = req.params;
   const service_table = `services_of_user_${user_id}_template_${template_id}`;
   const category_table = `services_category_of_user_${user_id}_template_${template_id}`;
-  console.log(category_table);
+  // console.log(category_table);
   const collection1 = mongoose.connection.collection(service_table);
   const cate_collection = mongoose.connection.collection(category_table);
   let categories_with_services = await cate_collection.aggregate([
@@ -150,7 +150,6 @@ const getAllServicesByCategory = async (req, res) => {
   categories_with_services = await categories_with_services.toArray();
   res.send({ service_categories_with_service: categories_with_services });
 };
-
 
 const edit_service_list = async (req, res) => {
   let { user_id, template_id, service_id } = req.params;
@@ -177,8 +176,8 @@ const postEditService = async (req, res) => {
   let { user_id, template_id, service_id } = req.params;
   const { service_name, service_description, service_price, service_times, service_days, service_category } = req.body;
 
-
-
+  let s_deleted_images = req.body.s_images;
+  // console.log('deleted arrays: ', s_deleted_images);
 
   const last_day_arr = JSON.parse(service_days).map((outerArray) => {
     return outerArray.filter((innerArray) => {
@@ -218,40 +217,38 @@ const postEditService = async (req, res) => {
     );
   }
 
-
-  // console.log(primaryImagePath);
-  // console.log(secondaryImagePaths);
-
-  // console.log('start');
-  // console.log(service_name);
-  // console.log(service_description);
-  // console.log(service_price);
-
-  // console.log('before');
-  // console.log(service_days);
-
-  // console.log('after');
-
-  // console.log(last_day_arr);
-  // console.log(last_time_arr);
-
-  const service_table = `services_of_user_${user_id}_template_${template_id}`
+  const service_table = `services_of_user_${user_id}_template_${template_id}`;
 
   const service_collection = mongoose.connection.collection(service_table);
+
+  let one_service_collection = await service_collection.findOne({ _id: new ObjectId(service_id), user_id: user_id, template_id: template_id });
+
+
+  let secondary_images = one_service_collection.secondary_images;
+
+  let updated_secondary_images = secondary_images.filter(url => !s_deleted_images.includes(url)); //not included array will return
+
+  console.log('Sahanaz start');
+  console.log(updated_secondary_images);
+  console.log('Sahanaz end');
+
+  const new_img_array = [...secondaryImagePaths, ...updated_secondary_images]; //concat 2 array with single one array
 
   let setData = {
     name: service_name,
     price: service_price,
     description: service_description,
     ...(JSON.stringify(primaryImagePath) !== '[]' && { primary_image: primaryImagePath }),
-    ...(JSON.stringify(secondaryImagePaths) !== '[]' && { secondary_images: secondaryImagePaths }),
+    // ...(JSON.stringify(secondaryImagePaths) !== '[]' && { secondary_images: secondaryImagePaths }),
+    ...(JSON.stringify(new_img_array) !== '[]' && { secondary_images: new_img_array }),
+
     service_days: last_day_arr[0],
     service_times: last_time_arr[0],
     service_days_pre: service_days,
     service_times_pre: service_times,
     service_category_id: service_category,
   };
-  // console.log(setData);
+
   try {
 
     const update = await service_collection.updateOne(
@@ -267,13 +264,13 @@ const postEditService = async (req, res) => {
   }
 
   catch (err) {
-    console.log(err);
+    console.log('Error');
 
   }
 
 }
 
-
+// delete service method
 const deleteService = async (req, res) => {
   console.log('delete');
   const { user_id, template_id, service_id } = req.params;
